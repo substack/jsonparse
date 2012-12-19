@@ -1,5 +1,10 @@
 var Buffer = require('buffer').Buffer;
 var json = typeof JSON === 'object' ? JSON : require('jsonify');
+var objectKeys = Object.keys || function (obj) {
+    var keys = [];
+    for (var key in obj) keys.push(key);
+    return keys;
+};
 
 // Named constants with unique integer values
 var C = {};
@@ -50,7 +55,7 @@ var ARRAY   = C.ARRAY   = 0x82;
 
 // Slow code to string converter (only used when throwing syntax errors)
 function toknam(code) {
-  var keys = Object.keys(C);
+  var keys = objectKeys(C);
   for (var i = 0, l = keys.length; i < l; i++) {
     var key = keys[i];
     if (C[key] === code) { return key; }
