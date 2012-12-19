@@ -1,4 +1,5 @@
 var Buffer = require('buffer').Buffer;
+var json = typeof JSON === 'object' ? JSON : require('jsonify');
 
 // Named constants with unique integer values
 var C = {};
