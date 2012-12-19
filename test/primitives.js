@@ -32,11 +32,12 @@ test('primitives', function (t) {
 
   var p = new Parser();
   p.onValue = function (value) {
-    var keys = this.stack
-      .slice(1)
-      .map(function (item) { return item.key })
-      .concat(this.key !== undefined ? this.key : [])
-    ;
+    var keys = [];
+    for (var i = 1; i < this.stack.length; i++) {
+        keys.push(this.stack[i].key);
+    }
+    if (this.key !== undefined) keys.push(this.key);
+
     t.deepEqual(
       [ keys, value ],
       expected.shift()
